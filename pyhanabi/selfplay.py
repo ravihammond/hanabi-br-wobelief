@@ -343,15 +343,6 @@ if __name__ == "__main__":
             args.sad,
             runners=eval_runners1,
         )
-      #  score2, perfect2, *_ = evaluate(
-      #      None,
-      #      500,
-      #      eval_seed,
-      #      args.eval_bomb,
-      #      0,  # explore eps
-      #      args.sad,
-      #      runners=eval_runners1[::-1],
-      #  )
         score2, perfect2, *_ = evaluate(
             None,
             500,
