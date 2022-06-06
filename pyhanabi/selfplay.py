@@ -317,8 +317,7 @@ if __name__ == "__main__":
 
         context.pause()
         eval_seed = (9917 + epoch * 999999) % 7777777
-       # for runner in eval_runners:
-       #     runner.update_model(agent)
+
         eval_runners1[0].update_model(agent)
         eval_runners2[0].update_model(agent)
         eval_runners3[0].update_model(agent)
