@@ -1,5 +1,5 @@
 # Training a Best Response Over a Pool of Hanabi Policies
-This codebase is largely based off https://github.com/facebookresearch/hanabi_SAD with some modifications. The code is set up to train a best response over a pool of 6 policies, and may be run via `python pyhanabi/selfplay.py`. Change `line 145` to modify the 6 training pool policies.
+This codebase is largely based off https://github.com/facebookresearch/hanabi_SAD with some modifications. The code is set up to train a best response over a pool of 6 policies, and may be run via `python pyhanabi/selfplay.py`. Change `line 145` in `pyhanabi/selfplay.py` to modify the 6 training pool policies.
 
 ## Compile
 We have been using `pytorch-1.5.1`, `cuda-10.1`, and `cudnn-v7.6.5` in our development environment.
