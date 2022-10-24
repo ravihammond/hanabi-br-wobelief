@@ -19,3 +19,6 @@ run-dev:
 run-prod:
 	bash scripts/run_docker_prod.bash
 
+run-old:
+	bash scripts/run_docker_old.bash
+
