@@ -1,0 +1,19 @@
+{
+    "train": [
+        "models/sad-op/M1.pthw", 
+        "models/sad-op/M3.pthw", 
+        "models/sad-op/M5.pthw", 
+        "models/sad-op/M7.pthw", 
+        "models/sad-op/M9.pthw", 
+        "models/sad-op/M11.pthw"
+    ],
+    "test": [
+        "models/sad-op/M2.pthw", 
+        "models/sad-op/M4.pthw", 
+        "models/sad-op/M6.pthw", 
+        "models/sad-op/M8.pthw", 
+        "models/sad-op/M10.pthw", 
+        "models/sad-op/M12.pthw"
+    ]
+}
+

@@ -9,4 +9,5 @@ __pycache__/
 *.swp
 
 keys/
+wandb_api_key.txt
 

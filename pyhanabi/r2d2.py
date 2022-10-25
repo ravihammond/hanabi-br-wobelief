@@ -510,3 +510,4 @@ class R2D2Agent(torch.jit.ScriptModule):
         else:
             loss = rl_loss
         return loss, priority
+
