@@ -7,7 +7,9 @@
 #include <pybind11/pybind11.h>
 
 #include "cpp/hanabi_env.h"
+#include "rela/r2d2_actor.h"
 #include "cpp/thread_loop.h"
+#include "cpp/convention_actor.h"
 
 namespace py = pybind11;
 
@@ -53,4 +55,8 @@ PYBIND11_MODULE(hanalearn, m) {
            std::shared_ptr<HanabiVecEnv>,
            bool>())
       ;
+
+  py::class_<ConventionActor, std::shared_ptr<ConventionActor>>(
+          m, "ConventionActor")
+      .def(py::init<>());
 }

@@ -79,8 +79,7 @@ PYBIND11_MODULE(rela, m) {
            int,                                            // numPlayer
            std::shared_ptr<RNNPrioritizedReplay>>())       // replayBuffer
       .def(py::init<std::shared_ptr<BatchRunner>, int>())  // evaluation mode
-      .def("num_act", &R2D2Actor::numAct)
-      ;
+      .def("num_act", &R2D2Actor::numAct);
 
   py::class_<BatchRunner, std::shared_ptr<BatchRunner>>(m, "BatchRunner")
       .def(py::init<py::object, const std::string&, int, const std::vector<std::string>&>())
