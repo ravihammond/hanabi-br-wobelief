@@ -7,6 +7,7 @@
 #include <pybind11/pybind11.h>
 
 #include "cpp/hanabi_env.h"
+#include "rela/r2d2_actor.h"
 #include "cpp/thread_loop.h"
 #include "cpp/r2d2_actor.h"
 //#include "cpp/convention_actor.h"
