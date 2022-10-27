@@ -3,12 +3,12 @@
 #include <pybind11/pybind11.h>
 #include <torch/extension.h>
 
+#include "rela/transition.h"
 #include "rela/context.h"
 #include "rela/env.h"
 #include "rela/prioritized_replay.h"
 #include "rela/r2d2_actor.h"
 #include "rela/thread_loop.h"
-#include "rela/transition.h"
 
 namespace py = pybind11;
 using namespace rela;

@@ -8,6 +8,8 @@
 
 #include "cpp/hanabi_env.h"
 #include "cpp/thread_loop.h"
+#include "cpp/r2d2_actor.h"
+//#include "cpp/convention_actor.h"
 
 namespace py = pybind11;
 
@@ -45,12 +47,41 @@ PYBIND11_MODULE(hanalearn, m) {
   py::class_<HanabiThreadLoop, rela::ThreadLoop, std::shared_ptr<HanabiThreadLoop>>(
       m, "HanabiThreadLoop")
       .def(py::init<
-           std::shared_ptr<rela::R2D2Actor>,
+           std::shared_ptr<R2D2Actor>,
            std::shared_ptr<HanabiVecEnv>,
            bool>())
       .def(py::init<
-           std::vector<std::shared_ptr<rela::R2D2Actor>>,
+           std::vector<std::shared_ptr<R2D2Actor>>,
            std::shared_ptr<HanabiVecEnv>,
            bool>())
       ;
+
+  py::class_<R2D2Actor, std::shared_ptr<R2D2Actor>>(m, "R2D2Actor")
+      .def(py::init<
+           std::shared_ptr<rela::BatchRunner>,                   // runner
+           int,                                            // multiStep
+           int,                                            // batchsize
+           float,                                          // gamma
+           float,                                          // eta
+           int,                                            // seqLen
+           int,                                            // numPlayer
+           std::shared_ptr<rela::RNNPrioritizedReplay>>())       // replayBuffer
+      .def(py::init<std::shared_ptr<rela::BatchRunner>, int>())  // evaluation mode
+      .def("num_act", &R2D2Actor::numAct)
+      ;
+
+  //py::class_<ConventionActor, R2D2Actor, 
+      //std::shared_ptr<ConventionActor>>(m, "ConventionActor")
+      //.def(py::init<
+           //std::shared_ptr<rela::BatchRunner>,                   // runner
+           //int,                                            // multiStep
+           //int,                                            // batchsize
+           //float,                                          // gamma
+           //float,                                          // eta
+           //int,                                            // seqLen
+           //int,                                            // numPlayer
+           //std::shared_ptr<rela::RNNPrioritizedReplay>>())       // replayBuffer
+      //.def(py::init<std::shared_ptr<rela::BatchRunner>, int>())  // evaluation mode
+      //.def("num_act", &ConventionActor::numAct)
+      //;
 }

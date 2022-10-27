@@ -46,7 +46,8 @@ def evaluate(agents, num_game, seed, bomb, eps, sad, *, hand_size=5, runners=Non
         env.append(g)
         actors = []
         for i in range(num_player):
-            actors.append(rela.R2D2Actor(runners[i], 1))
+            # actors.append(rela.R2D2Actor(runners[i], 1))
+            actors.append(hanalearn.R2D2Actor(runners[i], 1))
         thread = hanalearn.HanabiThreadLoop(actors, env, True)
         context.push_env_thread(thread)
 

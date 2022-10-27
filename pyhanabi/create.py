@@ -16,6 +16,8 @@ import numpy as np
 import torch
 import rela
 import hanalearn
+# R2D2Actor = rela.R2D2Actor
+R2D2Actor = hanalearn.R2D2Actor
 
 assert rela.__file__.endswith(".so")
 assert hanalearn.__file__.endswith(".so")
@@ -106,7 +108,7 @@ class ActGroup:
         self.eval_actors = []
        # if method == "vdn":
        #     for i in range(num_thread):
-       #         actor = rela.R2D2Actor(
+       #         actor = R2D2Actor(
        #             self.model_runners[i % self.num_runners],
        #             multi_step,
        #             num_game_per_thread,
@@ -121,7 +123,7 @@ class ActGroup:
             for i in range(num_thread):
                 thread_actors = []
                 for _ in range(num_player):
-                    actor = rela.R2D2Actor(
+                    actor = R2D2Actor(
                         self.model_runners[i % self.num_runners],
                         multi_step,
                         num_game_per_thread,
@@ -199,7 +201,7 @@ class ActGroupPool:
                 thread_actors = []
                 for j in range(num_player):
                     if j == 0:
-                        actor = rela.R2D2Actor(
+                        actor = R2D2Actor(
                             self.model_runners[i % self.num_runners],
                             multi_step,
                             num_game_per_thread,
@@ -210,7 +212,7 @@ class ActGroupPool:
                             replay_buffer,
                         )
                     else:
-                        actor = rela.R2D2Actor(
+                        actor = R2D2Actor(
                             self.partner_runners[i % self.num_partners],
                             multi_step,
                             num_game_per_thread,

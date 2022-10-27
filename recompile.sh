@@ -1,11 +1,12 @@
 #!/bin/bash
 
-if [ -d "./build" ]; then rm -Rf ./build; fi
+if [ ! -d build ]; then
+    mkdir build
+fi
 
-mkdir build
 cd build
-cmake ..
-make -j10
+
+cmake ..; make -j10
 
 if [ -d "/sad_lib" ]; then rm -Rf /sad_lib; fi
 mkdir /sad_lib
