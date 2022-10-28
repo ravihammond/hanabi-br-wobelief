@@ -17,6 +17,9 @@ import rela
 import r2d2_wov0 as r2d2
 import utils
 
+R2D2Actor = hanalearn.ConventionActor
+R2D2Actor = hanalearn.R2D2Actor
+
 
 def evaluate(agents, num_game, seed, bomb, eps, sad, *, hand_size=5, runners=None, device="cuda:0"):
     """
@@ -46,8 +49,7 @@ def evaluate(agents, num_game, seed, bomb, eps, sad, *, hand_size=5, runners=Non
         env.append(g)
         actors = []
         for i in range(num_player):
-            # actors.append(rela.R2D2Actor(runners[i], 1))
-            actors.append(hanalearn.R2D2Actor(runners[i], 1))
+            actors.append(R2D2Actor(runners[i], i, 1))
         thread = hanalearn.HanabiThreadLoop(actors, env, True)
         context.push_env_thread(thread)
 

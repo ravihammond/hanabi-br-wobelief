@@ -101,7 +101,7 @@ class VectorEnv {
         return true;
     }
 
-    virtual std::shared_ptr<EnvType> at(int i) {
+    virtual std::shared_ptr<EnvType> getEnv(int i) {
         return envs_[i];
     }
 

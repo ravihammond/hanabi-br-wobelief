@@ -17,7 +17,8 @@ import torch
 import rela
 import hanalearn
 # R2D2Actor = rela.R2D2Actor
-R2D2Actor = hanalearn.R2D2Actor
+# R2D2Actor = hanalearn.R2D2Actor
+R2D2Actor = hanalearn.ConventionActor
 
 assert rela.__file__.endswith(".so")
 assert hanalearn.__file__.endswith(".so")
@@ -55,6 +56,12 @@ def create_envs(
         games.append(game)
     return games
 
+def flatten(s):
+    if s == []:
+        return s
+    if isinstance(s[0], list):
+        return flatten(s[0]) + flatten(s[1:])
+    return s[:1] + flatten(s[1:])
 
 def create_threads(
     num_thread,
@@ -73,7 +80,7 @@ def create_threads(
         context.push_env_thread(thread)
     print(
         "Finished creating %d threads with %d games and %d actors"
-        % (len(threads), len(games), len(actors))
+        % (len(threads), len(games), len(flatten(actors)))
     )
     return context, threads
 
@@ -106,25 +113,13 @@ class ActGroup:
 
         self.actors = []
         self.eval_actors = []
-       # if method == "vdn":
-       #     for i in range(num_thread):
-       #         actor = R2D2Actor(
-       #             self.model_runners[i % self.num_runners],
-       #             multi_step,
-       #             num_game_per_thread,
-       #             gamma,
-       #             eta,
-       #             max_len,
-       #             num_player,
-       #             replay_buffer,
-       #         )
-       #         self.actors.append(actor)
         if method == "vdn":
             for i in range(num_thread):
                 thread_actors = []
-                for _ in range(num_player):
+                for j in range(num_player):
                     actor = R2D2Actor(
                         self.model_runners[i % self.num_runners],
+                        j,
                         multi_step,
                         num_game_per_thread,
                         gamma,
@@ -183,19 +178,6 @@ class ActGroupPool:
 
         self.actors = []
         self.eval_actors = []
-       # if method == "vdn":
-       #     for i in range(num_thread):
-       #         actor = rela.R2D2Actor(
-       #             self.model_runners[i % self.num_runners],
-       #             multi_step,
-       #             num_game_per_thread,
-       #             gamma,
-       #             eta,
-       #             max_len,
-       #             num_player,
-       #             replay_buffer,
-       #         )
-       #         self.actors.append(actor)
         if method == "iql":
             for i in range(num_thread):
                 thread_actors = []
@@ -203,6 +185,7 @@ class ActGroupPool:
                     if j == 0:
                         actor = R2D2Actor(
                             self.model_runners[i % self.num_runners],
+                            j,
                             multi_step,
                             num_game_per_thread,
                             gamma,
@@ -214,6 +197,7 @@ class ActGroupPool:
                     else:
                         actor = R2D2Actor(
                             self.partner_runners[i % self.num_partners],
+                            j,
                             multi_step,
                             num_game_per_thread,
                             gamma,

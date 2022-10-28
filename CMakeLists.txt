@@ -14,11 +14,10 @@ find_package(Torch REQUIRED)
 
 pybind11_add_module(
   hanalearn
-  #SHARED
   ${CMAKE_CURRENT_SOURCE_DIR}/cpp/hanabi_env.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/cpp/pybind.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/cpp/r2d2_actor.cc
-  #${CMAKE_CURRENT_SOURCE_DIR}/cpp/convention_actor.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/cpp/convention_actor.cc
 )
 target_link_libraries(hanalearn PUBLIC hanabi)
 target_link_libraries(hanalearn PUBLIC rela_lib)
